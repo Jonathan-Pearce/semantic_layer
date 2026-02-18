@@ -29,10 +29,11 @@ def load_data(parquet_path: str) -> pd.DataFrame:
 
 def query_duckdb(parquet_path: str, sql: str) -> pd.DataFrame:
     """Execute a SQL query against a parquet file using DuckDB."""
+    parquet_path = os.path.realpath(parquet_path)
+    if not os.path.isfile(parquet_path):
+        raise FileNotFoundError(f"Parquet file not found: {parquet_path}")
     conn = duckdb.connect()
-    conn.execute(
-        f"CREATE VIEW dataset AS SELECT * FROM read_parquet('{parquet_path}')"
-    )
+    conn.execute("CREATE VIEW dataset AS SELECT * FROM read_parquet(?)", [parquet_path])
     result = conn.execute(sql).fetchdf()
     conn.close()
     return result

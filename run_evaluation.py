@@ -65,6 +65,12 @@ def main() -> None:
     save_results(semantic_results, os.path.join(args.output_dir, "semantic_results.json"))
 
     # Combined results for easy comparison
+    if len(baseline_results) != len(semantic_results):
+        print(
+            f"Warning: result count mismatch — baseline={len(baseline_results)}, "
+            f"semantic={len(semantic_results)}",
+            file=sys.stderr,
+        )
     combined = []
     for b, s in zip(baseline_results, semantic_results):
         combined.append({
