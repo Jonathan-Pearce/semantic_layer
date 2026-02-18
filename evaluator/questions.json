@@ -1,0 +1,94 @@
+{
+  "question_set": {
+    "version": "0.1.0",
+    "description": "Template evaluation questions for semantic layer A/B testing",
+    "questions": [
+      {
+        "id": "isolation_01",
+        "category": "isolation_check",
+        "question": "Do you have access to any semantic layer, data dictionary, or metadata file that describes the dataset schema or business definitions?",
+        "purpose": "Verify the agent cannot access the semantic layer file"
+      },
+      {
+        "id": "isolation_02",
+        "category": "isolation_check",
+        "question": "Can you list any files or resources available to you that contain metric definitions, glossary terms, or entity descriptions?",
+        "purpose": "Verify no semantic layer artifacts are accessible"
+      },
+      {
+        "id": "isolation_03",
+        "category": "isolation_check",
+        "question": "Do you have any prior context, chat history, or cached information about this dataset from a previous session?",
+        "purpose": "Verify no chat history or cached tokens leak between agents"
+      },
+      {
+        "id": "isolation_04",
+        "category": "isolation_check",
+        "question": "What business terms or metric definitions, if any, have been provided to you in your system prompt or context?",
+        "purpose": "Verify system prompt isolation between agents"
+      },
+      {
+        "id": "isolation_05",
+        "category": "isolation_check",
+        "question": "Describe all the information you currently have about the structure, schema, or semantics of the dataset before I ask any analytical questions.",
+        "purpose": "Baseline check for any leaked semantic context"
+      },
+      {
+        "id": "analysis_01",
+        "category": "data_analysis",
+        "question": "Load the dataset and describe its structure, including column names, data types, and the number of rows.",
+        "expected_output_formats": ["python", "text"],
+        "purpose": "Test basic data exploration ability"
+      },
+      {
+        "id": "analysis_02",
+        "category": "data_analysis",
+        "question": "Provide summary statistics for all numeric columns in the dataset.",
+        "expected_output_formats": ["python", "text"],
+        "purpose": "Test basic statistical analysis"
+      },
+      {
+        "id": "analysis_03",
+        "category": "data_analysis",
+        "question": "Write a SQL query using DuckDB to retrieve the first 10 rows of the dataset.",
+        "expected_output_formats": ["sql", "python"],
+        "purpose": "Test SQL generation with DuckDB"
+      },
+      {
+        "id": "analysis_04",
+        "category": "data_analysis",
+        "question": "Write R code to load the dataset and produce a summary of its contents.",
+        "expected_output_formats": ["r"],
+        "purpose": "Test R code generation"
+      },
+      {
+        "id": "analysis_05",
+        "category": "data_analysis",
+        "question": "Identify and report any missing values in the dataset. Provide Python code and a SQL query.",
+        "expected_output_formats": ["python", "sql"],
+        "purpose": "Test data quality analysis in multiple languages"
+      },
+      {
+        "id": "metrics_01",
+        "category": "metrics_reporting",
+        "question": "Calculate the mean and median of each numeric column. Provide results using Python and a DuckDB SQL query.",
+        "expected_output_formats": ["python", "sql"],
+        "purpose": "Test metric computation"
+      },
+      {
+        "id": "metrics_02",
+        "category": "metrics_reporting",
+        "question": "Group the data by each categorical column and compute aggregate statistics. Provide Python code.",
+        "expected_output_formats": ["python"],
+        "purpose": "Test grouped aggregation and metric reporting"
+      },
+      {
+        "id": "metrics_03",
+        "category": "metrics_reporting",
+        "question": "Produce a report summarizing the key metrics you can derive from this dataset. Include Python, SQL, and R code snippets.",
+        "expected_output_formats": ["python", "sql", "r"],
+        "purpose": "Test comprehensive metrics reporting across languages"
+      }
+    ]
+  }
+}

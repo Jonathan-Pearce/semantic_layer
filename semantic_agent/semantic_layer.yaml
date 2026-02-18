@@ -1,0 +1,31 @@
+semantic_layer:
+  name: Template Semantic Layer
+  version: 0.1.0
+  description: >
+    Template semantic layer definition. Replace with actual dataset semantics.
+
+  data_source:
+    type: parquet
+    path: data/dataset.parquet
+
+  entities:
+    - name: example_entity
+      description: Description of the entity
+      primary_key: id
+
+  metrics:
+    - name: example_metric
+      description: Description of the metric
+      expression: "SUM(column_name)"
+      type: aggregate
+
+  dimensions:
+    - name: example_dimension
+      description: Description of the dimension
+      column: column_name
+      type: categorical
+
+  relationships: []
+
+  glossary:
+    example_term: Definition of the term as used in this dataset
